@@ -1,0 +1,11 @@
+.hover-valid {
+  background-color: #cceecc;
+}
+
+.hover-invalid {
+  background-color: #eecccc;
+}
+
+.tiles {
+  user-select: none;
+}
