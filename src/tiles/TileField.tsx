@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import './TileField.css';
-import { Tile, TileBoard, checkFit } from './tile';
+import { Tile, TileBoard, checkFit, generateTile } from './tile';
 
 const size = 7;
 
 interface TileFieldAttrs {
   initialTile: Tile;
   initialBoard: TileBoard;
+  colors: string[];
 }
 
 function TileField(attrs: TileFieldAttrs) {
@@ -19,10 +20,12 @@ function TileField(attrs: TileFieldAttrs) {
 
   function renderCell(cell: Tile | undefined, rowIndex: number, colIndex: number) {
     let className = '';
+    let canPut = false;
     if (cell === undefined && rowIndex === hoverRow && colIndex === hoverCol) {
       if (checkFit(board, nextTile, rowIndex, colIndex) === undefined) {
         // TODO: actually use the generated message
         className = 'hover-valid';
+        canPut = true;
       } else {
         className = 'hover-invalid';
       }
@@ -50,8 +53,25 @@ function TileField(attrs: TileFieldAttrs) {
       setHoverCol(-1);
     }
 
+    function handleClick() {
+      if (canPut) {
+        const newBoard: TileBoard = [];
+        for (const row of board) {
+          newBoard.push(row.slice());
+        }
+        newBoard[rowIndex][colIndex] = nextTile;
+        setBoard(newBoard);
+        setNextTile(generateTile(attrs.colors));
+      }
+    }
+
     return (
-      <td className={className} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={style}>
+      <td
+        className={className}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+        style={style}>
         x
       </td>
     );

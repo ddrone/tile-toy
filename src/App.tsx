@@ -2,7 +2,7 @@ import './App.css'
 import { generateTile, initField } from './tiles/tile'
 import TileField from './tiles/TileField'
 
-const colors = ["green", "red"];
+const colors = ["green", "red", "blue"];
 
 function App() {
   const board = initField(7, 7);
@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <TileField initialBoard={board} initialTile={tile} />
+      <TileField initialBoard={board} initialTile={tile} colors={colors} />
     </>
   )
 }
