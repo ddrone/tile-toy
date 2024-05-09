@@ -9,3 +9,7 @@
 .tiles {
   user-select: none;
 }
+
+.tiles td {
+  border: 4px solid transparent;
+}

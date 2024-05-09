@@ -28,6 +28,18 @@ function TileField(attrs: TileFieldAttrs) {
       }
     }
 
+    const style: Record<string, string> = {};
+    if (cell !== undefined) {
+      for (const [key, value] of Object.entries(cell)) {
+        style[`border-${key}-color`] = value;
+      }
+    }
+    else if (rowIndex === hoverRow && colIndex === hoverCol) {
+      for (const [key, value] of Object.entries(nextTile)) {
+        style[`border-${key}-color`] = value;
+      }
+    }
+
     function handleMouseEnter() {
       setHoverRow(rowIndex);
       setHoverCol(colIndex);
@@ -39,7 +51,7 @@ function TileField(attrs: TileFieldAttrs) {
     }
 
     return (
-      <td className={className} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <td className={className} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={style}>
         x
       </td>
     );
