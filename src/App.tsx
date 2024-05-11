@@ -2,7 +2,7 @@ import './App.css'
 import { generateTile, initField } from './tiles/tile'
 import TileField from './tiles/TileField'
 
-const colors = ["green", "red", "blue"];
+const colors = ["yellow", "red", "blue"];
 
 function App() {
   const board = initField(7, 7);
